@@ -23,4 +23,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ktoori/DevOps_2:latest
+          tags: ktoori/devops2:latest
