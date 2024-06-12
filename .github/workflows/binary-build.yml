@@ -27,7 +27,7 @@ jobs:
     - name: Build binary
       run: |
         pyinstaller --onefile main.py
-        mv dist/your_script dist/your_script.bin
+        mv dist/main dist/main.bin
 
     - name: Create release
       id: create_release
@@ -46,6 +46,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/your_script.bin
-        asset_name: your_script.bin
+        asset_path: ./dist/main.bin
+        asset_name: main.bin
         asset_content_type: application/octet-stream
