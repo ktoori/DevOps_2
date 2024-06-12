@@ -13,7 +13,7 @@ def multiply(a, b):
     return a * b
 
 def power(a, c):
-    """Возвращает произведение a и b."""
+    """Возвращает возведение a в степень b."""
     return pow(a, c)
 
 
