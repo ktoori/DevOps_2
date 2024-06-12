@@ -25,7 +25,26 @@ jobs:
     - name: Build
       run: |
         pyinstaller --onefile main.py
-    - name: Upload artifact
-      run: |
-          mkdir -p bin
-          bin/binfile.bin
+    - name: Upload binary as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-result
+        path: dist/
+
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Download build artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: build-result
+        path: dist/
+
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
