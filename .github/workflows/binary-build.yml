@@ -44,11 +44,23 @@ jobs:
         name: build-result
         path: dist/
 
-    - name: Create release
-      uses: softprops/action-gh-release@v1
+    - name: Create a release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref_name }}
         release_name: Release ${{ github.ref_name }}
-        files: dist/*
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: path/to/your/asset.zip
+        asset_name: your_asset.zip
+        asset_content_type: application/zip
