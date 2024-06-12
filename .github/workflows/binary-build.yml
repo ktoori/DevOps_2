@@ -28,10 +28,6 @@ jobs:
           pyinstaller --onefile main.py
           mv dist/main dist/main.bin
 
-  release:
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
